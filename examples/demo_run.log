@@ -1,0 +1,54 @@
+[2026-04-29 16:41:02.118] [INIT] async-task-network booted
+[2026-04-29 16:41:02.441] [SESSION] sid=run_f83k2
+
+[2026-04-29 16:41:02.903] [TASK_UNIT] create id=unit_7ac type=api_probe state=pending
+[2026-04-29 16:41:02.905] [TASK_UNIT] create id=unit_91d type=data_process state=pending
+
+[2026-04-29 16:41:03.114] [DISPATCH] unit_7ac → capability=code-gen
+
+[16:41:03.442] [EXEC] unit_7ac generating request logic
+[token_usage] 734
+
+[16:41:04.003] [EXEC] unit_7ac run attempt #1
+[16:41:04.287] [FAIL] unit_7ac reason=timeout
+
+[16:41:04.288] [STATE_CHANGE] unit_7ac → blocked
+
+[16:41:04.501] [BACKTRACK] trigger for unit_7ac
+[16:41:04.772] [DISPATCH] unit_7ac → capability=error-detect
+
+[16:41:05.119] [ANALYSIS] unit_7ac
+  cause:
+   - missing timeout param
+   - retry interval undefined
+
+[token_usage] 402
+
+[16:41:05.663] [DISPATCH] unit_7ac → capability=patch-apply
+
+[16:41:06.002] [EXEC] applying fix...
+[16:41:06.417] [EXEC] re-run
+
+[16:41:06.772] [OK] unit_7ac status=200 latency=801ms
+[16:41:06.773] [STATE_CHANGE] unit_7ac → resolved
+
+────────────────────────────
+
+[16:41:03.229] [DISPATCH] unit_91d → capability=data-clean
+
+[16:41:03.771] [EXEC] unit_91d processing dataset
+[token_usage] 882
+
+[16:41:04.882] [EXEC] filtering null values
+[16:41:05.992] [EXEC] exporting...
+
+[16:41:06.213] [OK] unit_91d output=clean_data.csv
+[16:41:06.214] [STATE_CHANGE] unit_91d → resolved
+
+────────────────────────────
+
+[SUMMARY]
+session: run_f83k2
+units: 2 resolved
+retry_paths: 1
+total_tokens: 2018
